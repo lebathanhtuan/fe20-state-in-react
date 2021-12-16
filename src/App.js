@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import Header from "./Header";
 import Footer from "./Footer";
+import Sidebar from "./Sidebar";
 import Item from "./Item";
 
 function App() {
+  const [count, setCount] = useState(5);
+  const [isShowSidebar, setIsShowSidebar] = useState(false);
+
   const name = "Tuấn";
 
   const productList = [
@@ -76,8 +80,19 @@ function App() {
 
   return (
     <div className="app">
-      <Header name={name} address="iViettech" />
+      <Sidebar
+        isShowSidebar={isShowSidebar}
+        setIsShowSidebar={setIsShowSidebar}
+      />
+      <Header
+        setIsShowSidebar={setIsShowSidebar}
+        name={name}
+        address="iViettech"
+      />
       <div className="main">
+        <div>{count}</div>
+        <button onClick={() => setCount(count + 1)}>+ Count</button>
+        <button onClick={() => setCount(count - 1)}>- Count</button>
         <h2>Danh sách sản phẩm</h2>
         <div className="list">{renderProductList()}</div>
       </div>
